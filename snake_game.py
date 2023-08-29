@@ -103,7 +103,7 @@ class SnakeGameAI:
     
     def is_collision(self, point=None):
         if point is None:
-            pt = self.head
+            point = self.head
 
         # hits boundary
         if point.x > self.w - BLOCK_SIZE or point.x < 0 or point.y > self.h - BLOCK_SIZE or point.y < 0:
