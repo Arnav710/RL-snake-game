@@ -76,7 +76,7 @@ class SnakeGameAI:
         # 3. check if game over
         reward = 0
         game_over = False
-        if self._is_collision() or self.frame_iteration > 100 * len(self.snake):
+        if self.is_collision() or self.frame_iteration > 100 * len(self.snake):
             game_over = True
             '''
             Actions should be penalized if we:
@@ -101,7 +101,7 @@ class SnakeGameAI:
         # 6. return game over and score
         return reward, game_over, self.score
     
-    def _is_collision(self, point):
+    def is_collision(self, point):
         if point is None:
             pt = self.head
 
