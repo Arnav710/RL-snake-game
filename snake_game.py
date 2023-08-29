@@ -2,6 +2,7 @@ import pygame
 import random
 from enum import Enum
 from collections import namedtuple
+import numpy as np
 
 pygame.init()
 font = pygame.font.Font('arial.ttf', 25)
@@ -127,15 +128,35 @@ class SnakeGameAI:
         pygame.display.flip()
         
     def _move(self, action):
+
+        clock_wise = [Direction.RIGHT, Direction.DOWN, Direction.LEFT, Direction.UP]
+        # index corresponding to the current direction
+        idx = clock_wise.index(self.direction)
+
+        STRAIGHT = [1, 0, 0]
+        RIGHT = [0, 1, 0]
+        LEFT = [0, 0, 1]
+
+        if np.array_equal(action, STRAIGHT):
+            new_dir = clock_wise[idx]
+        elif np.array_equal(action, RIGHT):
+            new_idx = (idx + 1) % 4
+            new_dir = clock_wise[new_idx]
+        elif np.array_equal(action, LEFT):
+            new_idx = (idx - 1) % 4
+            new_dir = clock_wise[new_idx]
+
+        self.direction = new_dir
+
         x = self.head.x
         y = self.head.y
-        if direction == Direction.RIGHT:
+        if self.direction == Direction.RIGHT:
             x += BLOCK_SIZE
-        elif direction == Direction.LEFT:
+        elif self.direction == Direction.LEFT:
             x -= BLOCK_SIZE
-        elif direction == Direction.DOWN:
+        elif self.direction == Direction.DOWN:
             y += BLOCK_SIZE
-        elif direction == Direction.UP:
+        elif self.direction == Direction.UP:
             y -= BLOCK_SIZE
             
         self.head = Point(x, y)
