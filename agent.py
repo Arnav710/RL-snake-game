@@ -10,7 +10,11 @@ LEARNING_RATE = 0.001
 
 class Agent:
     def __init__(self):
-        pass
+        self.n_games = 0
+        self.epsilon = 0 # controls the randomness
+        self.gamma = 0 # discount rate for reinforcement learning
+        self.memory = deque(maxlen=MAX_MEMORY)
+        # TODO: model, trainer
 
     def get_state(self, game):
         pass
