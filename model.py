@@ -25,7 +25,7 @@ class Linear_QNet(nn.Module):
         torch.save(self.state_dict(), file_path)
 
 class QTrainer:
-    def __inti__(self, model, lr, gamma):
+    def __init__(self, model, lr, gamma):
         self.model = model
         self.lr = lr
         self.gamma = gamma
